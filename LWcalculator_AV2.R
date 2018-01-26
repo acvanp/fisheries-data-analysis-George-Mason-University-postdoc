@@ -1,6 +1,6 @@
 # 2017
 # Alex Van Plantinga
-# This program takes fish species length and wieight data and 
+# This program takes fish species length and weight data and 
 # finds the a and b values for W = a*L^b equation.
 # The nls() function is finnicky and the loop can break with 
 # errors, so use try() and establish starting a and b values.
