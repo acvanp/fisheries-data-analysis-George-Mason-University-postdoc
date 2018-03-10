@@ -1,3 +1,6 @@
+Check out my first map made in R Shiny!
+https://acvanp.shinyapps.io/myfirstmapappinrshiny/
+
 The goal of this postdoctoral research fellowship, under a NOAA research grant with professor 
 Kim de Mutsert at George Mason University, is to model Gulf of Mexico food webs using Ecopath with Ecosim
 software. This requires using the SEAMAP database and SEDAR stock assessments to load accurate 
