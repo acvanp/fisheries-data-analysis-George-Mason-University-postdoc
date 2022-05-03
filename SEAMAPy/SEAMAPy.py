@@ -27,7 +27,13 @@ import geopy.distance
 
 os.chdir(r"D:\public_seamap_csvs")
 
-
+#df = pd.read_csv("GENUS_BGS_sums.csv")
+#bgsrec[bgsrec['GENUS_BGS'] == "CHLOROS"]["SPEC_BGS"]
+"""
+ll = []
+for i in list(genera.keys())[9:]:
+    ll.append(i + "_" + bgsrec[bgsrec['GENUS_BGS'] == i]["SPEC_BGS"].tolist()[0])
+"""
 
 genera = {"snapper": "LUTJANU", 
               "shrimp": "PENAEUS", 
@@ -37,7 +43,33 @@ genera = {"snapper": "LUTJANU",
               "croaker": "MICROPO",
               "grouper" : "MYCTERO",
               "mackerel" : "SCOMBER",
-              "anchovy" : "ANCHOA"}
+              "anchovy" : "ANCHOA",
+        'STENOTO_CAPRIN': 'STENOTO',
+        'CHLOROS_CHRYSU': 'CHLOROS',
+        'TRACHYP_SIMILI': 'TRACHYP',
+        'PEPRILU_ALEPID': 'PEPRILU',
+        'CALLINE_SAPIDU': 'CALLINE',
+        'PRIONOT_LONGIS': 'PRIONOT',
+        'LOLIGO_PLEII': 'LOLIGO',
+        'PORTUNU_SPINIM': 'PORTUNU',
+        'SICYONI_BREVIR': 'SICYONI',
+        'TRACHUR_LATHAM': 'TRACHUR',
+        'LEIOSTO_XANTHU': 'LEIOSTO',
+        'SQUILLA_EMPUSA': 'SQUILLA',
+        'LAGODON_RHOMBO': 'LAGODON',
+        'SYACIUM_GUNTER': 'SYACIUM',
+        'SERRANU_ATROBR': 'SERRANU',
+        'TRICHIU_LEPTUR': 'TRICHIU',
+        'ZOOBOTR_VERTIC': 'ZOOBOTR',
+        'AMUSIUM_PAPYRA': 'AMUSIUM',
+        'ETRUMEU_TERES': 'ETRUMEU',
+        'SYNODUS_FOETEN': 'SYNODUS',
+        'CENTROP_PHILAD': 'CENTROP',
+        'UPENEUS_PARVUS': 'UPENEUS',
+        'LOLLIGU_BREVIS': 'LOLLIGU',
+        'ARIUS_FELIS': 'ARIUS',
+        'SAURIDA_BRASIL': 'SAURIDA',
+}
 
 # centimeters to kg
 len_AB = {"LUTJANU" : [0.00001, 3.076],
@@ -48,7 +80,33 @@ len_AB = {"LUTJANU" : [0.00001, 3.076],
           "MICROPO" : [0.00000832, 3.17],
           "MYCTERO" : [0.00000891, 3.05],
           "SCOMBER" : [0.00000912, 3.02],
-          "ANCHOA" :  [0.00000537, 3.16]}
+          "ANCHOA" :  [0.00000537, 3.16],
+          # assume these have a common A and B value
+          'STENOTO': [0.00000891, 3.05],
+          'CHLOROS': [0.00000891, 3.05],
+          'TRACHYP': [0.00000891, 3.05],
+          'PEPRILU': [0.00000891, 3.05],
+          'CALLINE': [0.00000891, 3.05],
+          'PRIONOT': [0.00000891, 3.05],
+          'LOLIGO': [0.00000891, 3.05],
+          'PORTUNU': [0.00000891, 3.05],
+          'SICYONI': [0.00000891, 3.05],
+          'TRACHUR': [0.00000891, 3.05],
+          'LEIOSTO': [0.00000891, 3.05],
+          'SQUILLA': [0.00000891, 3.05],
+          'LAGODON': [0.00000891, 3.05],
+          'SYACIUM': [0.00000891, 3.05],
+          'SERRANU': [0.00000891, 3.05],
+          'TRICHIU': [0.00000891, 3.05],
+          'ZOOBOTR': [0.00000891, 3.05],
+          'AMUSIUM': [0.00000891, 3.05],
+          'ETRUMEU': [0.00000891, 3.05],
+          'SYNODUS': [0.00000891, 3.05],
+          'CENTROP': [0.00000891, 3.05],
+          'UPENEUS': [0.00000005, 3],
+          'LOLLIGU': [0.00000891, 3.05],
+          'ARIUS': [0.00000891, 3.05],
+          'SAURIDA': [0.00000891, 3.05],}
 
 fish_type = "snapper"
 
@@ -127,6 +185,7 @@ starec = starec.reset_index()
 print("aggregating GLFREC and BGSREC")
 
 glfrec_agg = glfrec.groupby(["GENUS_GLF", "STATIONID"]).mean() # mean length in mm
+#glfrec_agg = glfrec.groupby(["GENUS_GLF", "STATIONID"]).median()
 glfrec_agg = glfrec_agg.sort_index()
 
 bgsrec_agg = bgsrec.groupby(["GENUS_BGS", "STATIONID"]).sum() # sum of count-extrapolated CNTEXP
